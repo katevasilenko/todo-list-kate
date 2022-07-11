@@ -7,37 +7,42 @@
       <input class="btn btn-primary" type="submit" value="Add task">
     </a>
   </h1>
-  <ul>
-    {% if task_list %}
-      {% for task in task_list %}
-        <li>
-          {{ task.content }}
-          {% if task.is_done %}
-            Done
-            <a href="{% url 'todo_list:task-status' pk=task.id %}">
-              <input class="btn btn-secondary" type="submit" value="Undo">
-            </a>
-          {% else %}
-            Not done
-            <a href="{% url 'todo_list:task-status' pk=task.id %}">
-              <input class="btn btn-success" type="submit" value="Complete">
-            </a>
-          {% endif %}
-        </li>
-        <li>
-          Created: {{ task.datetime }}
-          {% if task.deadline %}
-            Deadline: {{ task.deadline }}
-          {% endif %}
-        </li>
-        <li>
-          Tags: {{ task.tags.name }}
-          <a href="{% url 'todo_list:task-update' pk=task.id %}">Update</a>
-          <a href="{% url 'todo_list:task-delete' pk=task.id %}">Delete</a>
-        </li>
-      {% endfor %}
-    {% else %}
-      <p>There is no task now</p>
-    {% endif %}
-  </ul>
+  {% if task_list %}
+    {% for task in task_list %}
+      <p>
+        {{ task.content }}
+        {% if task.is_done %}
+          Done
+          <a href="{% url 'todo_list:task-uncompleted' pk=task.id %}">
+            <input class="btn btn-secondary" type="submit" value="Undo">
+          </a>
+        {% endif %}
+        {% if not task.is_done %}
+          Not done
+          <a href="{% url 'todo_list:task-completed' pk=task.id %}">
+            <input class="btn btn-success" type="submit" value="Complete">
+          </a>
+        {% endif %}
+      </p>
+      <p>
+        Created: {{ task.datetime }}
+        {% if task.deadline %}
+          Deadline: {{ task.deadline }}
+        {% endif %}
+      </p>
+      <p>
+        Tags:
+        {% for tag in task.tags.all %}
+          {{ tag.name }}
+        {% endfor %}
+
+        <a href="{% url 'todo_list:task-update' pk=task.id %}">Update</a>
+        <a href="{% url 'todo_list:task-delete' pk=task.id %}">Delete</a>
+      </p>
+      <br>
+    {% endfor %}
+  {% else %}
+    <p>There is no task now</p>
+  {% endif %}
+
 {% endblock %}
