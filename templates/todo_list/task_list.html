@@ -4,7 +4,7 @@
   <h1>
     TODO List
     <a href="{% url 'todo_list:task-create' %}">
-      <input type="submit" value="Add task">
+      <input class="btn btn-primary" type="submit" value="Add task">
     </a>
   </h1>
   <ul>
@@ -15,12 +15,12 @@
           {% if task.is_done %}
             Done
             <a href="{% url 'todo_list:task-status' pk=task.id %}">
-              <input type="submit" value="Undo">
+              <input class="btn btn-secondary" type="submit" value="Undo">
             </a>
           {% else %}
             Not done
             <a href="{% url 'todo_list:task-status' pk=task.id %}">
-              <input type="submit" value="Complete">
+              <input class="btn btn-success" type="submit" value="Complete">
             </a>
           {% endif %}
         </li>

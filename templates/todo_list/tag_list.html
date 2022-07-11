@@ -4,7 +4,7 @@
   <h1>
     Tags
     <a href="{% url 'todo_list:tag-create' %}">
-      <input type="submit" value="Add">
+      <input class="btn btn-primary" type="submit" value="Add">
     </a>
   </h1>
   <table>
@@ -20,12 +20,12 @@
       </td>
       <td>
         <a href="{% url 'todo_list:tag-update' pk=tag.id %}">
-          <input type="submit" value="Update">
+          <input class="btn btn-secondary" type="submit" value="Update">
         </a>
       </td>
       <td>
         <a href="{% url 'todo_list:tag-delete' pk=tag.id %}">
-          <input type="submit" value="Delete">
+          <input class="btn btn-danger" type="submit" value="Delete">
         </a>
       </td>
     </tr>

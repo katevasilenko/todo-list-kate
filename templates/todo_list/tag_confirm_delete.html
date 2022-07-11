@@ -5,6 +5,6 @@
   <p>Do you really want to delete tag {{ task.name }}?</p>
   <form action="" method="post">
     {% csrf_token %}
-    <input type="submit" value="Delete">
+    <input class="btn btn-danger" type="submit" value="Delete">
   </form>
 {% endblock %}
