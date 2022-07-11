@@ -10,15 +10,15 @@
   {% if task_list %}
     {% for task in task_list %}
       <p>
-        {{ task.content }}
+        <strong>{{ task.content }}</strong>
         {% if task.is_done %}
-          Done
+          <strong><font color="green">Done</font></strong>
           <a href="{% url 'todo_list:task-uncompleted' pk=task.id %}">
             <input class="btn btn-secondary" type="submit" value="Undo">
           </a>
         {% endif %}
         {% if not task.is_done %}
-          Not done
+          <strong><font color="#8b0000">Not done</font></strong>
           <a href="{% url 'todo_list:task-completed' pk=task.id %}">
             <input class="btn btn-success" type="submit" value="Complete">
           </a>
@@ -27,13 +27,13 @@
       <p>
         Created: {{ task.datetime }}
         {% if task.deadline %}
-          Deadline: {{ task.deadline }}
+          <font color="#8b0000">Deadline: {{ task.deadline }}</font>
         {% endif %}
       </p>
       <p>
         Tags:
         {% for tag in task.tags.all %}
-          {{ tag.name }}
+          <font color="#696969">{{ tag.name }}</font>
         {% endfor %}
 
         <a href="{% url 'todo_list:task-update' pk=task.id %}">Update</a>
